@@ -92,3 +92,22 @@ src/tasks/           controller, service, repository, DTOs
 src/database/        conexión a Postgres
 database/migrations/ esquema SQL
 ```
+
+
+## Uso de IA
+Qué le pedí: el andamiaje (ConfigModule, pool, ValidationPipe), la migración, el CRUD con DTOs, pero lo trabajé por capas primero cree module, le pedi DTOS, repository, service y controller y revisando cada etapa si cumplia con las especificaciones, no en un solo prompt.
+
+Pedi analisis de lo impl y que aspecto debian ser cubierto por los tests, Swagger y el README tambien.
+
+
+## Decisiones
+- NestJS + pg directo, sin ORM. Es una tabla y cinco queries; el SQL explícito pesa menos que una capa de abstracción. 
+- Las migraciones son SQL versionado (golang-migrate, up/down), no parte del runtime.
+- Repository separado del Service.
+- Validación usando las ventajas de Nestjs, ValidationPipe global (whitelist, forbidNonWhitelisted, transform) y DTOs; el controller no valida nada. 
+- PATCH exige al menos un campo (ValidateIf + IsDefined).
+
+## Qué haría con más tiempo
+- e2e reales
+- CI con lint + tests + build.
+- API key (X-API-Key)/Jwt
