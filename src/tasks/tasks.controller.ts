@@ -14,8 +14,8 @@ import {
 import { CreateTaskDto } from './dto/create-task.dto.js';
 import { ListTasksQueryDto } from './dto/list-tasks-query.dto.js';
 import { UpdateTaskDto } from './dto/update-task.dto.js';
-import { PaginatedTasks, TasksService } from './tasks.service.js';
-import { Task } from './types.js';
+import { TasksService } from './tasks.service.js';
+import { PaginatedTasks, Task } from './types.js';
 
 @Controller('tasks')
 export class TasksController {

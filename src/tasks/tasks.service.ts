@@ -3,14 +3,8 @@ import { CreateTaskDto } from './dto/create-task.dto.js';
 import { ListTasksQueryDto } from './dto/list-tasks-query.dto.js';
 import { UpdateTaskDto } from './dto/update-task.dto.js';
 import { TasksRepository } from './tasks.repository.js';
-import { Task } from './types.js';
+import { PaginatedTasks, Task } from './types.js';
 
-export interface PaginatedTasks {
-  items: Task[];
-  total: number;
-  page: number;
-  limit: number;
-}
 
 const TASK_NOT_FOUND_ERROR = (id: string) => `Task ${id} not found`;
 

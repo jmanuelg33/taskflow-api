@@ -21,3 +21,10 @@ export interface TaskFilters {
   limit: number;
   offset: number;
 }
+
+export interface PaginatedTasks {
+  items: Task[];
+  total: number;
+  page: number;
+  limit: number;
+}
