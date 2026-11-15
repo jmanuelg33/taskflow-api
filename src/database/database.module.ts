@@ -5,27 +5,27 @@ import { Pool } from 'pg';
 export const DATABASE_POOL = Symbol('DATABASE_POOL');
 
 @Module({
-        providers:[
-        {
-            provide: DATABASE_POOL,
-            inject:[ConfigService],
-            useFactory: async (configService: ConfigService) => {
-                const pool = new Pool({
-                    connectionString: configService.getOrThrow('DATABASE_URL')
-                })
+  providers: [
+    {
+      provide: DATABASE_POOL,
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        const pool = new Pool({
+          connectionString: configService.getOrThrow('DATABASE_URL'),
+        });
 
-                await pool.query('SELECT 1'); // test connection is valid
-                return pool;
-            }
-        }
-    ],
+        await pool.query('SELECT 1'); // test connection is valid
+        return pool;
+      },
+    },
+  ],
 
-    exports:[DATABASE_POOL]
+  exports: [DATABASE_POOL],
 })
 export class DatabaseModule {
-    constructor(@Inject(DATABASE_POOL) private readonly pool: Pool) {}
+  constructor(@Inject(DATABASE_POOL) private readonly pool: Pool) {}
 
-    async onApplicationShutdown() {
-        await this.pool.end();
-    }
+  async onApplicationShutdown() {
+    await this.pool.end();
+  }
 }
